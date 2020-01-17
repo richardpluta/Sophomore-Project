@@ -1,4 +1,12 @@
-﻿using System.Collections;
+﻿/*
+  Rafael Montes 
+  1/17/2020
+  Sophmore Project
+
+  Description: This code will allow the player to move.
+ */
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
