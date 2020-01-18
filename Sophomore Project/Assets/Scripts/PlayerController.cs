@@ -12,6 +12,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public float speed = 20.0f;
+    public float jumpSpeed = 10.0f;
+    public float horizontalInput;
+    public float verticalInput;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +27,11 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        horizontalInput = Input.GetAxis("Horizontal");
+        verticalInput = Input.GetAxis("Vertical");
+        transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
+        transform.Translate(Vector3.up * Time.deltaTime * speed * verticalInput);
         
+
     }
 }
