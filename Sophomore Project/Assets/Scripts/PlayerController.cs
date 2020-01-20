@@ -13,35 +13,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private LayerMask platformsLayerMask;
     public float speed = 20.0f;
-    public float jumpSpeed = 10.0f;
     public float horizontalInput;
-    public float verticalInput;
-    private Rigidbody2D rigidbody2d;
 
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    private void Awake()
-    {
-        rigidbody2d = transform.GetComponent<Rigidbody2D>();
-    }
+    
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Console.WriteLine("Hello");
-            float jumpVelocity = 10f;
-            rigidbody2d.velocity = Vector2.up * jumpVelocity;
-        }
         horizontalInput = Input.GetAxis("Horizontal");
         transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
-        
-
     }
+
+    
+    
 }
