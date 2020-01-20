@@ -13,19 +13,41 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private LayerMask platformsLayerMask;
-    public float speed = 20.0f;
-    public float horizontalInput;
+    public CharacterController2D controller;
 
+    public float runSpeed = 40f;
 
-    
+    public float horizontalMove = 0f;
+    bool jump = false;
+    bool crouch = false;
+
     // Update is called once per frame
-    private void Update()
+    void Update()
     {
-        horizontalInput = Input.GetAxis("Horizontal");
-        transform.Translate(Vector3.right * Time.deltaTime * speed * horizontalInput);
+
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+        
+        if (Input.GetButtonDown("Jump"))
+        {
+            jump = true;
+        }
+
+        if (Input.GetButtonDown("Crouch"))
+        {
+            crouch = true;
+        }
+        else if (Input.GetButtonUp("Crouch"))
+        {
+            crouch = false;
+        }
+        
     }
 
-    
-    
+    void FixedUpdate()
+    {
+        // Move our character
+        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+        jump = false;
+    }
+
 }
