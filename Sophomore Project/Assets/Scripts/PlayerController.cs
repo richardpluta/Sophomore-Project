@@ -14,9 +14,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public CharacterController2D controller;
-
     public float runSpeed = 40f;
-
     public float horizontalMove = 0f;
     bool jump = false;
 
