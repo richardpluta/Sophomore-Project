@@ -14,12 +14,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public CharacterController2D controller;
-
     public float runSpeed = 40f;
-
     public float horizontalMove = 0f;
     bool jump = false;
-    bool crouch = false;
 
     // Update is called once per frame
     void Update()
@@ -32,21 +29,13 @@ public class PlayerController : MonoBehaviour
             jump = true;
         }
 
-        if (Input.GetButtonDown("Crouch"))
-        {
-            crouch = true;
-        }
-        else if (Input.GetButtonUp("Crouch"))
-        {
-            crouch = false;
-        }
         
     }
 
     void FixedUpdate()
     {
         // Move our character
-        controller.Move(horizontalMove * Time.fixedDeltaTime, crouch, jump);
+        controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
         jump = false;
     }
 
