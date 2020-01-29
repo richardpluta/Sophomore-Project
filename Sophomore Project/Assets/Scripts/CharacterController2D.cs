@@ -1,14 +1,4 @@
-﻿/*
-    Rafael Montes
-    1/19/2020
-    Sophomore Project 
-
-    NOTE: This code was pulled from GitHub https://github.com/Brackeys/2D-Character-Controller/blob/master/CharacterController2D.cs.
-    I did not write this code. All credit is due to Brackeys 
-    Youtube channel:
-*/
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class CharacterController2D : MonoBehaviour
