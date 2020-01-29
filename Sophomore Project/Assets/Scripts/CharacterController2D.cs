@@ -11,6 +11,7 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
     [SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
     [SerializeField] private Collider2D m_CrouchDisableCollider;                // A collider that will be disabled when crouching
+    [SerializeField] private GameObject m_Camera;
 
     const float k_GroundedRadius = .2f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
@@ -29,6 +30,7 @@ public class CharacterController2D : MonoBehaviour
 
     public BoolEvent OnCrouchEvent;
     private bool m_wasCrouching = false;
+   
 
     private void Awake()
     {
@@ -45,7 +47,7 @@ public class CharacterController2D : MonoBehaviour
     {
         bool wasGrounded = m_Grounded;
         m_Grounded = false;
-
+        
         // The player is grounded if a circlecast to the groundcheck position hits anything designated as ground
         // This can be done using layers instead but Sample Assets will not overwrite your project settings.
         Collider2D[] colliders = Physics2D.OverlapCircleAll(m_GroundCheck.position, k_GroundedRadius, m_WhatIsGround);
@@ -131,6 +133,10 @@ public class CharacterController2D : MonoBehaviour
             m_Grounded = false;
             m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
         }
+
+        // Set the camera ontop of the player
+        Transform transform = m_Camera.GetComponent<Transform>();
+        transform.SetPositionAndRotation(this.transform.position+new Vector3(0,0,-1), new Quaternion(0, 0, 0, 0));
     }
 
 
@@ -139,9 +145,13 @@ public class CharacterController2D : MonoBehaviour
         // Switch the way the player is labelled as facing.
         m_FacingRight = !m_FacingRight;
 
+        transform.Rotate(0f, 180f, 0f);
+
+        /*
         // Multiply the player's x local scale by -1.
         Vector3 theScale = transform.localScale;
         theScale.x *= -1;
         transform.localScale = theScale;
+        */
     }
 }
