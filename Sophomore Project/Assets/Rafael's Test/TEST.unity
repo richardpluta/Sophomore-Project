@@ -532,7 +532,7 @@ CircleCollider2D:
   m_GameObject: {fileID: 1496086241}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b9417e8530d7f465d98f66a1a1f0e2a3, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -548,11 +548,11 @@ BoxCollider2D:
   m_GameObject: {fileID: 1496086241}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: b9417e8530d7f465d98f66a1a1f0e2a3, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0011083856, y: 0.00000025331974}
+  m_Offset: {x: -0.005398862, y: 0.00000025331974}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -563,7 +563,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.15433879, y: 0.1293576}
+  m_Size: {x: 0.14575784, y: 0.1293576}
   m_EdgeRadius: 0
 --- !u!50 &1496086244
 Rigidbody2D:
@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_JumpForce: 350
-  m_CrouchSpeed: 0.4
+  m_CrouchSpeed: 1
   m_MovementSmoothing: 0
   m_AirControl: 1
   m_WhatIsGround:
@@ -692,7 +692,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1496086245}
-  runSpeed: 30
+  runSpeed: 10
   horizontalMove: 0
 --- !u!1 &1829119544
 GameObject:
