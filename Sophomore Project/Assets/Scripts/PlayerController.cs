@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
 
         
     }
-
+    
     void FixedUpdate()
     {
         // Move our character
