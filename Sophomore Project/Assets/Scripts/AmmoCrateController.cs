@@ -15,7 +15,7 @@ public class AmmoCrateController : MonoBehaviour
         Enabled = true;
         Collider = gameObject.GetComponent<BoxCollider2D>();
         Renderer = gameObject.GetComponent<SpriteRenderer>();
-       
+ 
         if (Collider == null || Renderer == null)
         {
             Enabled = false;

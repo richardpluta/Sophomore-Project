@@ -18,6 +18,8 @@ public class WeaponController : MonoBehaviour
     {
         CurrentAmmo = MaxAmmo;
         Debug.Log("WeaponController starting");       
+
+
     }
 
     // Update is called once per frame
@@ -40,6 +42,11 @@ public class WeaponController : MonoBehaviour
         
         if (hit)
         {
+            EnemyController enemy = hit.transform.GetComponent<EnemyController>();
+            if (enemy != null)
+            {
+                enemy.Damage(Damage);
+            }
             Beam.SetPosition(0, FirePoint.position);
             Beam.SetPosition(1, hit.point);
         } else
