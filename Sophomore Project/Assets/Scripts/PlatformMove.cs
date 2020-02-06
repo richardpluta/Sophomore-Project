@@ -9,6 +9,8 @@ public class PlatformMove : MonoBehaviour
     private bool moveUp = true;
 
     public GameObject player;
+    public bool MoveHorizontal;
+    public bool MoveVertical;
     public float moveSpeed = 3f;
     public float distanceHorizontal;
     public float distanceVertical;
@@ -17,8 +19,11 @@ public class PlatformMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Horizontal();
-        Vertical();
+        if(MoveHorizontal)
+            Horizontal();
+
+        if(MoveVertical)
+            Vertical();
     }
 
     void Horizontal()
