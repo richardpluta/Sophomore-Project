@@ -1,5 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿/*
+    Rafael Montes
+    2/10/2020
+    This code will make the player respawn if he/she touches a killzone.
+*/
 using UnityEngine;
 
 public class Respawn : MonoBehaviour
