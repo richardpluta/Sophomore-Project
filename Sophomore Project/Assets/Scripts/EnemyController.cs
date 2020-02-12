@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Pathfinding;
 
 public class EnemyController : MonoBehaviour
 {
 
     [SerializeField] private int Speed;
     [SerializeField] private int MaxHealth;
-    [SerializeField] private int ActivationRange;
+    [SerializeField] private int DetectionRange;
     [SerializeField] private LayerMask WhatIsGround;
     [SerializeField] private float JumpForce = 400f;
-    [Range(0, .3f)] [SerializeField] private float MovementSmoothing = .05f;  // How much to smooth out the movement
+    [Range(0, .3f)] [SerializeField] private float MovementSmoothing = .05f;  // The time it takes to change velocity
 
     const float GroundedRadius = .09f; // Radius of the overlap circle to determine if grounded
     const float CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
@@ -21,12 +22,18 @@ public class EnemyController : MonoBehaviour
     private SpriteRenderer Renderer;
     private CircleCollider2D Collider;
     private Rigidbody2D Rigidbody2D;
+    private Seeker Seeker;
+
+    private Transform Player;
 
     private bool Grounded;
     private bool FacingRight = true; 
-    private Vector3 Velocity = Vector3.zero;
+    private Vector2 Velocity = Vector2.zero;
     private int Health;
 
+    private float NextWaypointDistance;
+    private Path Path;
+    private int CurrentWaypoint;
     
 
 
@@ -39,15 +46,16 @@ public class EnemyController : MonoBehaviour
         Renderer = GetComponent<SpriteRenderer>();
         Collider = GetComponent<CircleCollider2D>();
         Rigidbody2D = GetComponent<Rigidbody2D>();
+        Seeker = GetComponent<Seeker>();
 
+        Player = GameObject.Find("Player").GetComponent<Transform>();
 
         Health = MaxHealth;
         
-        Debug.Log("GroundCheck: " + GroundCheck);
-        Debug.Log("CeilingCheck: " + CeilingCheck);
-
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
+
+        this.Seeker.StartPath(this.Rigidbody2D.position, this.Player.position, OnPathComplete);
     }
 
     private void FixedUpdate()
@@ -67,6 +75,15 @@ public class EnemyController : MonoBehaviour
                     OnLandEvent.Invoke();
             }
         }
+
+        //Check if player is in range or not
+        if (Vector2.Distance(Player.position, transform.position) <= DetectionRange)
+        {
+
+        } else
+        {
+
+        }
     }
 
     private void Move(float move, bool jump)
@@ -75,9 +92,9 @@ public class EnemyController : MonoBehaviour
         if (Grounded)
         {
             // Move the character by finding the target velocity
-            Vector3 targetVelocity = new Vector2(move * 10f, Rigidbody2D.velocity.y);
+            Vector2 targetVelocity = new Vector2(move * 10f, Rigidbody2D.velocity.y);
             // And then smoothing it out and applying it to the character
-            Rigidbody2D.velocity = Vector3.SmoothDamp(Rigidbody2D.velocity, targetVelocity, ref Velocity, MovementSmoothing);
+            Rigidbody2D.velocity = Vector2.SmoothDamp(Rigidbody2D.velocity, targetVelocity, ref Velocity, MovementSmoothing);
 
             // If enemy is moving in a direction they are not facing
             if ((move > 0 && !FacingRight) || (move < 0 && FacingRight)) 
@@ -112,5 +129,10 @@ public class EnemyController : MonoBehaviour
 
         if (Health <= 0)
             Kill();
+    }
+
+    private void OnPathComplete()
+    {
+
     }
 }
