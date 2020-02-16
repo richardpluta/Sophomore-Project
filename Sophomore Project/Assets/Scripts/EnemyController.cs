@@ -31,6 +31,7 @@ public class EnemyController : MonoBehaviour
     private Vector2 Velocity = Vector2.zero;
     private int Health;
 
+    private bool UsingPath;
     private float NextWaypointDistance;
     private Path Path;
     private int CurrentWaypoint;
@@ -51,11 +52,12 @@ public class EnemyController : MonoBehaviour
         Player = GameObject.Find("Player").GetComponent<Transform>();
 
         Health = MaxHealth;
+
+        UsingPath = false;
         
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
 
-        this.Seeker.StartPath(this.Rigidbody2D.position, this.Player.position, OnPathComplete);
     }
 
     private void FixedUpdate()
@@ -77,13 +79,29 @@ public class EnemyController : MonoBehaviour
         }
 
         //Check if player is in range or not
-        if (Vector2.Distance(Player.position, transform.position) <= DetectionRange)
+        if (!UsingPath)
         {
+            Debug.Log("Enemy not following path");
+            if (Vector2.Distance(Player.position, transform.position) <= DetectionRange)
+            {
+                Debug.Log("Player within range");
+                UsingPath = true;
+                this.Seeker.StartPath(this.Rigidbody2D.position, this.Player.position, OnPathComplete);
+            }
+            else
+            {
 
-        } else
+            }
+        } else if (this.Path != null) 
         {
+            if (CurrentWaypoint >= this.Path.vectorPath.Count)
+            {
+                this.Path = null;
+                return;
+            }
 
-        }
+            Vector2 direction = ((Vector2)this.Path.vectorPath[CurrentWaypoint] - this.Rigidbody2D.position).normalized;
+        } 
     }
 
     private void Move(float move, bool jump)
@@ -131,8 +149,14 @@ public class EnemyController : MonoBehaviour
             Kill();
     }
 
-    private void OnPathComplete()
+    void OnPathComplete(Path p)
     {
+        if (!p.error)
+        {
+            Debug.Log("Path generated");
+            this.Path = p;
+            CurrentWaypoint = 0;
 
+        }
     }
 }

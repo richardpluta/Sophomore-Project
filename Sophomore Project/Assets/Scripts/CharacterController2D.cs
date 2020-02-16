@@ -11,7 +11,12 @@ public class CharacterController2D : MonoBehaviour
     [SerializeField] private Transform m_GroundCheck;                           // A position marking where to check if the player is grounded.
     [SerializeField] private Transform m_CeilingCheck;                          // A position marking where to check for ceilings
     [SerializeField] private Collider2D m_CrouchDisableCollider;                // A collider that will be disabled when crouching
-    [SerializeField] private GameObject m_Camera;
+    
+    
+    private Transform m_Camera;
+    private Transform m_Background;
+
+
 
     const float k_GroundedRadius = .09f; // Radius of the overlap circle to determine if grounded
     private bool m_Grounded;            // Whether or not the player is grounded.
@@ -35,6 +40,8 @@ public class CharacterController2D : MonoBehaviour
     private void Awake()
     {
         m_Rigidbody2D = GetComponent<Rigidbody2D>();
+        m_Camera = GameObject.Find("Main Camera").GetComponent<Transform>();
+        m_Background = GameObject.Find("Background").GetComponent<Transform>();
 
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
@@ -135,8 +142,8 @@ public class CharacterController2D : MonoBehaviour
         }
 
         // Set the camera ontop of the player
-        Transform transform = m_Camera.GetComponent<Transform>();
-        transform.SetPositionAndRotation(this.transform.position+new Vector3(0,0,-1), Quaternion.identity);
+        m_Camera.SetPositionAndRotation(this.transform.position+new Vector3(0,0,-1), Quaternion.identity);
+        m_Background.SetPositionAndRotation(this.transform.position + new Vector3(0, 0, 1), Quaternion.identity);
     }
 
 
