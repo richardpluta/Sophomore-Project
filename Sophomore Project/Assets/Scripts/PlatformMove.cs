@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,7 @@ public class PlatformMove : MonoBehaviour
 {
     private bool moveRight = true;
     private bool moveUp = true;
+    private float startingX, startingY;
 
     public GameObject player;
     public bool MoveHorizontal;
@@ -19,6 +21,13 @@ public class PlatformMove : MonoBehaviour
     public float distanceHorizontal;
     public float distanceVertical;
 
+
+    //Get starting position of object 
+    private void Start()
+    {
+        startingX = transform.position.x;
+        startingY = transform.position.y;
+    }
 
     // Update is called once per frame
     void Update()
@@ -33,9 +42,9 @@ public class PlatformMove : MonoBehaviour
     //Moves platform right to left 
     void Horizontal()
     {
-        if (transform.position.x > distanceHorizontal)
+        if (transform.position.x > (startingX + distanceHorizontal))
             moveRight = false;
-        if (transform.position.x < -distanceHorizontal)
+        if (transform.position.x < (startingX - distanceHorizontal))
             moveRight = true;
 
         if (moveRight)
@@ -47,9 +56,9 @@ public class PlatformMove : MonoBehaviour
     //Moves platform up and down 
     private void Vertical()
     {
-        if (transform.position.y > distanceVertical)
+        if (transform.position.y > (startingY + distanceVertical))
             moveUp = false;
-        if (transform.position.y < -distanceVertical)
+        if (transform.position.y < (startingY - distanceVertical))
             moveUp = true;
 
         if (moveUp)
