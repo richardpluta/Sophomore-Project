@@ -32,7 +32,7 @@ public class EnemyController : MonoBehaviour
     private int Health;
 
     private bool UsingPath;
-    private float NextWaypointDistance;
+    [SerializeField] private float NextWaypointDistance;
     private Path Path;
     private int CurrentWaypoint;
     
@@ -94,13 +94,30 @@ public class EnemyController : MonoBehaviour
             }
         } else if (this.Path != null) 
         {
+            Debug.Log("Path is not null");
             if (CurrentWaypoint >= this.Path.vectorPath.Count)
             {
+                Debug.Log("Current waypoint is outside of the path");
                 this.Path = null;
+                CurrentWaypoint = 0;
+                UsingPath = false;
                 return;
             }
 
             Vector2 direction = ((Vector2)this.Path.vectorPath[CurrentWaypoint] - this.Rigidbody2D.position).normalized;
+            Vector2 force = direction * Speed * Time.deltaTime;
+
+            Debug.Log("Current waypoint: " + this.Path.vectorPath[CurrentWaypoint] + "Current position: " + this.Rigidbody2D.position + "Direction:" + direction + "\nForce: " + force);
+
+            this.Rigidbody2D.AddForce(force);
+
+            float distance = Vector2.Distance(this.Rigidbody2D.position, this.Path.vectorPath[CurrentWaypoint]);
+
+            if (distance < NextWaypointDistance)
+            {
+                CurrentWaypoint++;
+            }
+
         } 
     }
 
@@ -156,7 +173,6 @@ public class EnemyController : MonoBehaviour
             Debug.Log("Path generated");
             this.Path = p;
             CurrentWaypoint = 0;
-
         }
     }
 }
