@@ -1,0 +1,34 @@
+
+*.meta
+/**/*.meta
+*.meta
+Sophomore Project/Assets/Game Sprites.meta
+Sophomore Project/Assets/Game Sprites/Ammo_canister.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Idle.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Idle/Left.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Idle/Left/Character_Idle_Left_1.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Idle/Left/Character_Idle_Left_2.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Idle/Right.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Idle/Right/Character_Idle_Right_1.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Idle/Right/Character_Idle_Right_2.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Left.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Left/Character_Run_Left_1.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Left/Character_Run_Left_2.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Left/Character_Run_Left_3.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Left/Character_Run_Left_4.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Left/Character_Run_Left_5.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Left/Character_Run_Left_6.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Left/Character_Run_Left_7.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Left/Character_Run_Left_8.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Right.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Right/Character_Run_Right_1.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Right/Character_Run_Right_2.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Right/Character_Run_Right_3.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Right/Character_Run_Right_4.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Right/Character_Run_Right_5.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Right/Character_Run_Right_6.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Right/Character_Run_Right_7.png.meta
+Sophomore Project/Assets/Game Sprites/Character Sprite/Character_Run/Right/Character_Run_Right_8.png.meta
+Sophomore Project/Assets/Game Sprites/heart.png.meta
