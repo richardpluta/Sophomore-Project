@@ -21,14 +21,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        
-
-        
-    }
-    
-    void FixedUpdate()
-    {
         // Move our character
 
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
@@ -40,6 +32,12 @@ public class PlayerController : MonoBehaviour
 
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
         jump = false;
+
+    }
+    
+    void FixedUpdate()
+    {
+
     }
 
 }
