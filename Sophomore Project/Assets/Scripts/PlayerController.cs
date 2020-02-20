@@ -22,12 +22,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
 
-        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
         
-        if (Input.GetButtonDown("Jump"))
-        {
-            jump = true;
-        }
 
         
     }
@@ -35,6 +30,14 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         // Move our character
+
+        horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
+
+        if (Input.GetButtonDown("Jump"))
+        {
+            jump = true;
+        }
+
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
         jump = false;
     }
