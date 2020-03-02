@@ -29,8 +29,7 @@ public class PlatformMove : MonoBehaviour
         startingY = transform.position.y;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(MoveHorizontal)
             Horizontal();
