@@ -24,6 +24,7 @@ public class CharacterController2D : MonoBehaviour
     private Rigidbody2D m_Rigidbody2D;
     private bool m_FacingRight = true;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
+    private Vector3 respawnPoint;
 
     [Header("Events")]
     [Space]
@@ -160,5 +161,18 @@ public class CharacterController2D : MonoBehaviour
         theScale.x *= -1;
         transform.localScale = theScale;
         */
+    }
+
+    private void OnTriggerEnter2D(Collider2D obj)
+    {
+        if (obj.tag == "KillZone")
+        {
+            transform.position = respawnPoint;
+        }
+
+        if (obj.tag == "Checkpoint")
+        {
+            respawnPoint = obj.transform.position;
+        }
     }
 }
