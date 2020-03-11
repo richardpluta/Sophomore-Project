@@ -38,5 +38,11 @@ public class playerHealth : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
+        
+    }
+
+    void damage(int dmg)
+    {
+        health = health - dmg;
     }
 }
