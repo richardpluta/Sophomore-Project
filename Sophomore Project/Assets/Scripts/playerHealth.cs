@@ -12,6 +12,13 @@ public class playerHealth : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
+    private CharacterController2D player;
+
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>();
+    }
     void Update()
     {
         if (health > maxHealth)
@@ -37,6 +44,12 @@ public class playerHealth : MonoBehaviour
             {
                 hearts[i].enabled = false;
             }
+        }
+
+        if (health <= 0)
+        {
+            transform.position = player.respawnPoint;
+            health = maxHealth;
         }
         
     }
