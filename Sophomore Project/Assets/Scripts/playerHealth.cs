@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
+
 
 public class playerHealth : MonoBehaviour
 {
     public int health;
     public int maxHealth;
+    public int EnemyDamage;
 
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
-
+    
+    void Start()
+    {
+        health = maxHealth;
+    }
     void Update()
     {
         if (health > maxHealth)
@@ -41,8 +48,16 @@ public class playerHealth : MonoBehaviour
         
     }
 
-    void damage(int dmg)
+    private void OnTriggerEnter2D(Collider2D obj)
     {
-        health = health - dmg;
+        if (obj.tag == "Enemy")
+        {
+            damagePlayer(1);
+        }
+    }
+
+    public void damagePlayer(int dmg)
+    {
+        health -= dmg;
     }
 }

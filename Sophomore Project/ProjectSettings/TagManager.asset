@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Checkpoint
   - KillZone
+  - Enemy
   layers:
   - Default
   - TransparentFX
