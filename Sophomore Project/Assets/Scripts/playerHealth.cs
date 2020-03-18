@@ -45,4 +45,14 @@ public class playerHealth : MonoBehaviour
     {
         health = health - dmg;
     }
+
+    private void OnTriggerEnter2D(Collider2D obj)
+    {
+        if (obj.tag == "Spikes")
+        {
+            damage(1);
+        }
+
+        
+    }
 }
