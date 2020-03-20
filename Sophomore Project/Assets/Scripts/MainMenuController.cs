@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public class MainMenuController : MonoBehaviour
 {
     Dictionary<string, GameObject> frames = new Dictionary<string, GameObject>();
     string[] frameStack = new string[4];
-    int top = 0;
+    int top = -1;
 
     GameObject currentFrame;
 
@@ -17,11 +18,27 @@ public class MainMenuController : MonoBehaviour
         frames.Add("SettingsMenu", gameObject.transform.Find("SettingsMenu").gameObject);
         frames.Add("KeybindsMenu", gameObject.transform.Find("KeybindsMenu").gameObject);
 
-        currentFrame = frames["TitleScreen"];
+        changeFrame("TitleScreen");
 
-        foreach (GameObject button in currentFrame.Find("Buttons").gameObject)
+        foreach (Transform button in currentFrame.transform.Find("Buttons"))
         {
-
+            void callMethod() {
+                switch (button.gameObject.name)
+                {
+                    case "Play":
+                        changeFrame("LevelSelect");
+                        break;
+                    case "Settings":
+                        changeFrame("SettingsMenu");
+                        break;
+                    case "Credits":
+                        break;
+                    case "Quit":
+                        Application.Quit();
+                        break;
+                }
+            }
+            button.gameObject.GetComponent<Button>().onClick.AddListener(callMethod);
         }
 
         foreach (GameObject frame in frames.Values)
@@ -43,7 +60,7 @@ public class MainMenuController : MonoBehaviour
 
     private void setCurrentFrame(string newFrame)
     {
-        if (frames[newFrame] != null)
+        if (frames.ContainsKey(newFrame))
         {
             currentFrame = frames[newFrame];
             currentFrame.GetComponent<Canvas>().enabled = true;
@@ -60,7 +77,7 @@ public class MainMenuController : MonoBehaviour
 
     private void changeFrame(string frameName)
     {
-        frameStack[top++] = frameName;
+        frameStack[++top] = frameName;
         setCurrentFrame(frameStack[top]);
     }
 
