@@ -14,10 +14,20 @@ public class playerHealth : MonoBehaviour
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
-    
+
+
     void Start()
     {
         health = maxHealth;
+    }
+
+    private CharacterController2D player;
+
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>();
+
     }
     void Update()
     {
@@ -45,6 +55,12 @@ public class playerHealth : MonoBehaviour
                 hearts[i].enabled = false;
             }
         }
+
+        if (health <= 0)
+        {
+            transform.position = player.respawnPoint;
+            health = maxHealth;
+        }
         
     }
 
@@ -54,10 +70,16 @@ public class playerHealth : MonoBehaviour
         {
             damagePlayer(1);
         }
+
+        if (obj.tag == "Spikes")
+        {
+            damage(1);
+        }
     }
 
     public void damagePlayer(int dmg)
     {
         health -= dmg;
     }
+
 }

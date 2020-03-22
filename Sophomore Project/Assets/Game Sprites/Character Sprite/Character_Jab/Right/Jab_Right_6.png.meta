@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 608e257a6238e04499b451aa1703a145
+=======
+guid: d715bb7b8e3a3ce459b07261109a0a17
+>>>>>>> spikeLogic
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}

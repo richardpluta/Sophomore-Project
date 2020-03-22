@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: facaee764d77e5649bfe70487f06e912
+=======
+guid: 93c4068b83677e74999f6bf74c75d7ad
+>>>>>>> spikeLogic
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

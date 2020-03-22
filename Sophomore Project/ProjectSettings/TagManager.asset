@@ -6,7 +6,11 @@ TagManager:
   tags:
   - Checkpoint
   - KillZone
+<<<<<<< HEAD
   - Enemy
+=======
+  - Spikes
+>>>>>>> spikeLogic
   layers:
   - Default
   - TransparentFX
