@@ -15,20 +15,16 @@ public class playerHealth : MonoBehaviour
     public Sprite fullHeart;
     public Sprite emptyHeart;
 
-
-    void Start()
-    {
-        health = maxHealth;
-    }
-
     private CharacterController2D player;
 
 
     void Start()
     {
+        health = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>();
 
     }
+ 
     void Update()
     {
         if (health > maxHealth)
@@ -73,7 +69,7 @@ public class playerHealth : MonoBehaviour
 
         if (obj.tag == "Spikes")
         {
-            damage(1);
+            damagePlayer(1);
         }
     }
 
