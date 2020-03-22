@@ -8,6 +8,9 @@ public class MainMenuController : MonoBehaviour
     Dictionary<string, GameObject> frames = new Dictionary<string, GameObject>();
     string[] frameStack = new string[4];
     int top = -1;
+    int volume = 50;
+    int brightness = 50;
+    int difficulty = 0;
 
     GameObject currentFrame;
 
@@ -48,7 +51,38 @@ public class MainMenuController : MonoBehaviour
             {
                 backButton.gameObject.GetComponent<Button>().onClick.AddListener(popFrame);
             }
-            Debug.Log(frame.name);
+            
+            switch (frame.name)
+            {
+                case "LevelSelect":
+                    foreach (Transform button in frame.transform.Find("Panel").Find("Levels"))
+                    {
+                        void changeLevel()
+                        {
+                            //maybe some method call to see if level is unlocked
+                            //or do it in ChangeScene
+                            //sceneManager.ChangeScene(button.gameObject.name);
+                        }
+                        button.gameObject.GetComponent<Button>().onClick.AddListener(changeLevel);
+                    }
+                    break;
+                case "SettingsMenu":
+                    foreach (Transform settingPanel in frame.transform.Find("Panel").Find("Settings"))
+                    {
+                        switch (settingPanel.gameObject.name)
+                        {
+                            case "Difficulty":
+                                break;
+                            case "Brightness":
+                                break;
+                            case "Volume":
+                                break;
+                            case "Keybinds":
+                                break;
+                        }
+                    }
+                    break;
+            }
         }
     }
 
