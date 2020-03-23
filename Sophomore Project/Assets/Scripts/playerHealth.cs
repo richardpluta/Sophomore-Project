@@ -7,22 +7,29 @@ using System;
 
 public class playerHealth : MonoBehaviour
 {
+    [SerializeField]
+    private float invincibilityDurationSeconds;
+    [SerializeField]
+    private float delayBetweenInvincibilityFlashes;
+
     public int health;
     public int maxHealth;
-    public int EnemyDamage;
+
+    [SerializeField]
+    private int spikeDmg;
+    [SerializeField]
+    private int enemyDmg;
 
     public Image[] hearts;
     public Sprite fullHeart;
     public Sprite emptyHeart;
-
     private CharacterController2D player;
-
+    private bool isInvincible = false;
 
     void Start()
     {
         health = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterController2D>();
-
     }
  
     void Update()
@@ -54,28 +61,59 @@ public class playerHealth : MonoBehaviour
 
         if (health <= 0)
         {
+            WeaponController weapon = player.GetComponent<WeaponController>();
+            weapon.RefillAmmo(100);
             transform.position = player.respawnPoint;
             health = maxHealth;
         }
         
     }
 
-    private void OnTriggerEnter2D(Collider2D obj)
+    private IEnumerator coroutine;
+
+    private void OnTriggerStay2D(Collider2D obj)
     {
         if (obj.tag == "Enemy")
         {
-            damagePlayer(1);
+            damagePlayer(enemyDmg);
         }
+        if (obj.tag == "Spikes") {
+            damagePlayer(spikeDmg);
+        }
+    }
 
-        if (obj.tag == "Spikes")
-        {
-            damagePlayer(1);
+    private void OnTriggerEnter2D(Collider2D obj) {
+        if (obj.tag == "KillZone") {
+            damagePlayer(health);
         }
     }
 
     public void damagePlayer(int dmg)
     {
+        if (isInvincible) return;
+
         health -= dmg;
+
+        StartCoroutine(BecomeTemporarilyInvincible());
     }
+
+    private IEnumerator BecomeTemporarilyInvincible()
+    {
+        // Debug.Log("Player turned invincible!");
+        isInvincible = true;
+
+        // Flash on and off for roughly invincibilityDurationSeconds seconds
+        for (float i = 0; i < invincibilityDurationSeconds; i += delayBetweenInvincibilityFlashes)
+        {
+            player.GetComponent<SpriteRenderer>().enabled = !(player.GetComponent<SpriteRenderer>().enabled);
+            yield return new WaitForSeconds(delayBetweenInvincibilityFlashes);
+        }
+
+        player.GetComponent<SpriteRenderer>().enabled = true;
+
+        // Debug.Log("Player is no longer invincible!");
+        isInvincible = false;
+    }
+
 
 }
