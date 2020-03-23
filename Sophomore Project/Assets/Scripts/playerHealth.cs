@@ -54,6 +54,8 @@ public class playerHealth : MonoBehaviour
 
         if (health <= 0)
         {
+            WeaponController weapon = player.GetComponent<WeaponController>();
+            weapon.RefillAmmo(100);
             transform.position = player.respawnPoint;
             health = maxHealth;
         }
