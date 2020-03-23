@@ -8,8 +8,8 @@ public class MainMenuController : MonoBehaviour
     Dictionary<string, GameObject> frames = new Dictionary<string, GameObject>();
     string[] frameStack = new string[4];
     int top = -1;
-    int volume = 50;
-    int brightness = 50;
+    float volume = 50;
+    float brightness = 50;
     int difficulty = 0;
 
     GameObject currentFrame;
@@ -20,6 +20,7 @@ public class MainMenuController : MonoBehaviour
         frames.Add("LevelSelect", gameObject.transform.Find("LevelSelect").gameObject);
         frames.Add("SettingsMenu", gameObject.transform.Find("SettingsMenu").gameObject);
         frames.Add("KeybindsMenu", gameObject.transform.Find("KeybindsMenu").gameObject);
+        //frames.Add("CreditsMenu", gameObject.transform.Find("CreditsMenu").gameObject);
 
         changeFrame("TitleScreen");
 
@@ -35,6 +36,7 @@ public class MainMenuController : MonoBehaviour
                         changeFrame("SettingsMenu");
                         break;
                     case "Credits":
+                        //changeFrame("CreditsMenu");
                         break;
                     case "Quit":
                         Application.Quit();
@@ -57,13 +59,18 @@ public class MainMenuController : MonoBehaviour
                 case "LevelSelect":
                     foreach (Transform button in frame.transform.Find("Panel").Find("Levels"))
                     {
-                        void changeLevel()
+                        bool unlocked = SceneController.IsLevelUnlocked(button.gameObject.name);
+
+                        if (unlocked)
                         {
-                            //maybe some method call to see if level is unlocked
-                            //or do it in ChangeScene
-                            //sceneManager.ChangeScene(button.gameObject.name);
+                            button.GetComponent<Image>().color = new Color((float)209/255,(float)134/255,(float)50/255,1);
+                            button.gameObject.GetComponent<Button>().onClick.AddListener(delegate {
+                                SceneController.ChangeScene(button.gameObject.name);
+                            });
+                        } else
+                        {
+                            button.GetComponent<Image>().color = new Color((float)109/255,(float)103/255,(float)96/255,1);
                         }
-                        button.gameObject.GetComponent<Button>().onClick.AddListener(changeLevel);
                     }
                     break;
                 case "SettingsMenu":
@@ -72,12 +79,50 @@ public class MainMenuController : MonoBehaviour
                         switch (settingPanel.gameObject.name)
                         {
                             case "Difficulty":
-                                break;
+                                {
+                                    Slider slider = settingPanel.Find("Slider").gameObject.GetComponent<Slider>();
+
+                                    slider.onValueChanged.AddListener(delegate { changeDifficulty((int)slider.value); });
+                                    break;
+                                }
                             case "Brightness":
-                                break;
+                                {
+                                    Slider slider = settingPanel.Find("Slider").gameObject.GetComponent<Slider>();
+                                    InputField inputField = settingPanel.Find("InputField").GetComponent<InputField>();
+
+                                    slider.onValueChanged.AddListener(delegate {
+                                        inputField.text = "" + slider.value;
+                                        changeBrightness((int)slider.value);
+                                    });
+
+                                    inputField.onEndEdit.AddListener(delegate {
+                                        int val = int.Parse(inputField.text);
+                                        slider.value = val;
+                                        changeBrightness(val);
+                                    });
+                                    break;
+                                }
                             case "Volume":
+                                {
+                                    Slider slider = settingPanel.Find("Slider").gameObject.GetComponent<Slider>();
+                                    InputField inputField = settingPanel.Find("InputField").GetComponent<InputField>();
+
+                                    slider.onValueChanged.AddListener(delegate {
+                                        inputField.text = "" + slider.value;
+                                        changeVolume((int)slider.value);
+                                    });
+
+                                    inputField.onEndEdit.AddListener(delegate {
+                                        int val = int.Parse(inputField.text);
+                                        slider.value = val;
+                                        changeVolume(val);
+                                    });
+                                }
                                 break;
                             case "Keybinds":
+                                settingPanel.Find("Text").GetComponent<Button>().onClick.AddListener(delegate {
+                                    changeFrame("KeybindsMenu");
+                                });
                                 break;
                         }
                     }
@@ -119,5 +164,22 @@ public class MainMenuController : MonoBehaviour
     {
         frameStack[top--] = null;
         setCurrentFrame(frameStack[top]);
+    }
+
+    private void changeDifficulty(int newDifficulty)
+    {
+        difficulty = newDifficulty;
+    }
+
+    private void changeBrightness(float newBrightness)
+    {
+        brightness = newBrightness;
+        Screen.brightness = brightness / 100;
+    }
+
+    private void changeVolume(float newVolume)
+    {
+        volume = newVolume;
+        AudioListener.volume = volume;
     }
 }
