@@ -14,7 +14,11 @@ public class playerHealth : MonoBehaviour
 
     public int health;
     public int maxHealth;
-    public int EnemyDamage;
+
+    [SerializeField]
+    private int spikeDmg;
+    [SerializeField]
+    private int enemyDmg;
 
     public Image[] hearts;
     public Sprite fullHeart;
@@ -69,9 +73,12 @@ public class playerHealth : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D obj)
     {
-        if (obj.tag == "Enemy" || obj.tag == "Spikes")
+        if (obj.tag == "Enemy")
         {
-            damagePlayer(1);
+            damagePlayer(enemyDmg);
+        }
+        if (obj.tag == "Spikes") {
+            damagePlayer(spikeDmg);
         }
     }
 
