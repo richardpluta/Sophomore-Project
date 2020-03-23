@@ -683,7 +683,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   maxHealth: 10
-  EnemyDamage: 0
+  EnemyDamage: 1
   hearts:
   - {fileID: 1068761791}
   - {fileID: 1838720168}
@@ -12242,7 +12242,7 @@ GameObject:
   - component: {fileID: 1640745560}
   m_Layer: 9
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
