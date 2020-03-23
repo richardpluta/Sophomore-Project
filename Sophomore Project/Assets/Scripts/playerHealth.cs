@@ -73,7 +73,12 @@ public class playerHealth : MonoBehaviour
         {
             damagePlayer(1);
         }
-        
+    }
+
+    private void OnTriggerEnter2D(Collider2D obj) {
+        if (obj.tag == "KillZone") {
+            damagePlayer(health);
+        }
     }
 
     public void damagePlayer(int dmg)
