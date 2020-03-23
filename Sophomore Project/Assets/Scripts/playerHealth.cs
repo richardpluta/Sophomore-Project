@@ -92,7 +92,7 @@ public class playerHealth : MonoBehaviour
 
     private IEnumerator BecomeTemporarilyInvincible()
     {
-        Debug.Log("Player turned invincible!");
+        // Debug.Log("Player turned invincible!");
         isInvincible = true;
 
         // Flash on and off for roughly invincibilityDurationSeconds seconds
@@ -104,7 +104,7 @@ public class playerHealth : MonoBehaviour
 
         player.GetComponent<SpriteRenderer>().enabled = true;
 
-        Debug.Log("Player is no longer invincible!");
+        // Debug.Log("Player is no longer invincible!");
         isInvincible = false;
     }
 
