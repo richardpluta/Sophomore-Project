@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
+            animator.SetBool("IsJumping", true);
         }
 
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
@@ -38,9 +39,9 @@ public class PlayerController : MonoBehaviour
 
     }
     
-    void FixedUpdate()
+    public void OnLanding()
     {
-
+        animator.SetBool("IsJumping", false);
     }
 
 }
