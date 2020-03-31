@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System;
+using UnityEngine.UI;
 
 public class WeaponController : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private int Damage;
     [SerializeField] private int MaxAmmo;
     private int CurrentAmmo;
-    
+    public Transform ammoDisplay;
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +30,8 @@ public class WeaponController : MonoBehaviour
         {
             StartCoroutine(Shoot());
         }
+        ammoDisplay.GetComponent<Text>().text = CurrentAmmo.ToString();
+
     }
 
     public void RefillAmmo(int amount)
