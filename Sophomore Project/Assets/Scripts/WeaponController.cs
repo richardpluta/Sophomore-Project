@@ -12,7 +12,7 @@ public class WeaponController : MonoBehaviour
     [SerializeField] private int Damage;
     [SerializeField] private int MaxAmmo;
     private int CurrentAmmo;
-    public Transform ammoDisplay;
+    public Text ammoDisplay;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,7 @@ public class WeaponController : MonoBehaviour
         CurrentAmmo = MaxAmmo;
         Debug.Log("WeaponController starting");       
 
-
+        ammoDisplay = GameObject.FindObjectOfType<Text>();
     }
 
     // Update is called once per frame
@@ -30,8 +30,8 @@ public class WeaponController : MonoBehaviour
         {
             StartCoroutine(Shoot());
         }
-        ammoDisplay.GetComponent<Text>().text = CurrentAmmo.ToString();
-
+        
+        ammoDisplay.text = CurrentAmmo.ToString();
     }
 
     public void RefillAmmo(int amount)

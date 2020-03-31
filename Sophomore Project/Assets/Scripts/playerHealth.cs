@@ -97,6 +97,10 @@ public class playerHealth : MonoBehaviour
         StartCoroutine(BecomeTemporarilyInvincible());
     }
 
+    public void healPlayer(int heal) {
+        health += heal;
+    }
+
     private IEnumerator BecomeTemporarilyInvincible()
     {
         // Debug.Log("Player turned invincible!");
