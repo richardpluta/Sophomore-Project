@@ -14,6 +14,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public CharacterController2D controller;
+    public Animator animator;
     public float runSpeed = 40f;
     public float horizontalMove = 0f;
     bool jump = false;
@@ -25,9 +26,12 @@ public class PlayerController : MonoBehaviour
 
         horizontalMove = Input.GetAxisRaw("Horizontal") * runSpeed;
 
+        animator.SetFloat("Speed", Math.Abs(horizontalMove));
+
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
+            animator.SetBool("IsJumping", true);
         }
 
         controller.Move(horizontalMove * Time.fixedDeltaTime, false, jump);
@@ -35,9 +39,9 @@ public class PlayerController : MonoBehaviour
 
     }
     
-    void FixedUpdate()
+    public void OnLanding()
     {
-
+        animator.SetBool("IsJumping", false);
     }
 
 }
