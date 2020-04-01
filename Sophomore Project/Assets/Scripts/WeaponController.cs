@@ -41,7 +41,7 @@ public class WeaponController : MonoBehaviour
 
     IEnumerator Shoot()
     {
-        RaycastHit2D hit = Physics2D.Raycast(FirePoint.position, FirePoint.right);
+        RaycastHit2D hit = Physics2D.Raycast(FirePoint.position, FirePoint.right, 100f, LayerMask.GetMask("Ground","Enemy"));
         
         if (hit)
         {
