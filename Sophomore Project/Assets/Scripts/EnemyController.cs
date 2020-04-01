@@ -14,20 +14,20 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float JumpForce = 400f;
     [Range(0, .3f)] [SerializeField] private float MovementSmoothing = .05f;  // The time it takes to change velocity
 
-    const float GroundedRadius = .09f; // Radius of the overlap circle to determine if grounded
+    const float GroundedRadius = .1f; // Radius of the overlap circle to determine if grounded
     const float CeilingRadius = .2f; // Radius of the overlap circle to determine if the player can stand up
 
     private Transform GroundCheck; 
     private Transform CeilingCheck;
     private SpriteRenderer Renderer;
-    private CircleCollider2D Collider;
+    private CapsuleCollider2D Collider;
     private Rigidbody2D Rigidbody2D;
     private Seeker Seeker;
 
     private Transform Player;
 
     private bool Grounded;
-    private bool FacingRight = true; 
+    private bool FacingRight = false; 
     private Vector2 Velocity = Vector2.zero;
     private int Health;
 
@@ -35,6 +35,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float NextWaypointDistance;
     private Path Path;
     private int CurrentWaypoint;
+
+    private bool SeenPlayer;
     
 
 
@@ -45,16 +47,16 @@ public class EnemyController : MonoBehaviour
         GroundCheck = gameObject.transform.GetChild(0);
         CeilingCheck = gameObject.transform.GetChild(1);
         Renderer = GetComponent<SpriteRenderer>();
-        Collider = GetComponent<CircleCollider2D>();
+        Collider = GetComponent<CapsuleCollider2D>();
         Rigidbody2D = GetComponent<Rigidbody2D>();
         Seeker = GetComponent<Seeker>();
 
-        Player = GameObject.Find("Player").GetComponent<Transform>();
+        Player = GameObject.Find("Player").transform;
 
         Health = MaxHealth;
 
         UsingPath = false;
-        
+        SeenPlayer = false;
         if (OnLandEvent == null)
             OnLandEvent = new UnityEvent();
 
@@ -77,7 +79,31 @@ public class EnemyController : MonoBehaviour
                     OnLandEvent.Invoke();
             }
         }
+   
+        if (SeenPlayer)
+        {
+            //Debug.Log("Enemy is engaging player");
+            //move towards player on X, jump if something is in its way
+            Vector2 offset = Player.position - transform.position;
+            float horizontalMove = offset.normalized.x * Speed;
 
+            //Debug.Log("Offset: " + offset + "\nHorizontal: " + horizontalMove);
+            RaycastHit2D hit = Physics2D.Raycast(GroundCheck.position, -GroundCheck.right, .25f, LayerMask.GetMask("Ground"));
+            bool jump = (hit.transform != null) || (offset.y > .5f);
+
+            //bool jump = (Physics2D.Raycast(transform.position, -transform.right, .25f, LayerMask.GetMask("Ground")) != null);
+            Debug.Log("Jump: " + jump);
+
+            Move(horizontalMove * Time.fixedDeltaTime, jump);
+        } else if (Vector2.Distance(Player.position, transform.position) <= DetectionRange)
+        {
+            Debug.Log("Enemy in range");
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Player.position - transform.position, 10f, LayerMask.GetMask("Default", "Ground"));
+            Debug.Log("Hit: " + hit.transform);
+            SeenPlayer = hit.transform == Player;
+
+        }
+        /*
         //Check if player is in range or not
         if (!UsingPath)
         {
@@ -119,23 +145,24 @@ public class EnemyController : MonoBehaviour
             }
 
         } 
+        */
     }
 
     private void Move(float move, bool jump)
     {
-        //only control the player if grounded or airControl is turned on
-        if (Grounded)
-        {
-            // Move the character by finding the target velocity
-            Vector2 targetVelocity = new Vector2(move * 10f, Rigidbody2D.velocity.y);
-            // And then smoothing it out and applying it to the character
-            Rigidbody2D.velocity = Vector2.SmoothDamp(Rigidbody2D.velocity, targetVelocity, ref Velocity, MovementSmoothing);
+        Debug.Log("Move called, grounded: " + Grounded + " move: " + move);
 
-            // If enemy is moving in a direction they are not facing
-            if ((move > 0 && !FacingRight) || (move < 0 && FacingRight)) 
-                Flip();
-        }
-        // If the player should jump...
+
+        // Move the character by finding the target velocity
+        Vector2 targetVelocity = new Vector2(move * 10f, Rigidbody2D.velocity.y);
+        // And then smoothing it out and applying it to the character
+        Rigidbody2D.velocity = Vector2.SmoothDamp(Rigidbody2D.velocity, targetVelocity, ref Velocity, MovementSmoothing);
+
+        // If enemy is moving in a direction they are not facing
+        if ((move > 0 && !FacingRight) || (move < 0 && FacingRight)) 
+            Flip();
+
+        // If the Enemy should jump...
         if (Grounded && jump)
         {
             // Add a vertical force to the player.
