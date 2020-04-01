@@ -794,6 +794,7 @@ GameObject:
   - component: {fileID: 313728109}
   - component: {fileID: 313728108}
   - component: {fileID: 313728117}
+  - component: {fileID: 313728118}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -846,7 +847,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313728107}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 148cde6c5fa9f66428d1523514346918, type: 2}
   m_IsTrigger: 0
@@ -862,7 +863,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313728107}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 6200000, guid: 148cde6c5fa9f66428d1523514346918, type: 2}
   m_IsTrigger: 0
@@ -1054,6 +1055,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!70 &313728118
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313728107}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 148cde6c5fa9f66428d1523514346918, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.0204646}
+  m_Size: {x: 0.22553004, y: 0.44843316}
+  m_Direction: 0
 --- !u!1 &364172807
 GameObject:
   m_ObjectHideFlags: 0
@@ -14306,7 +14323,6 @@ MonoBehaviour:
     m_Bits: 256
   JumpForce: 200
   MovementSmoothing: 0.05
-  NextWaypointDistance: 0.1
   OnLandEvent:
     m_PersistentCalls:
       m_Calls: []
