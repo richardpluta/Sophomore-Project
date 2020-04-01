@@ -59,11 +59,20 @@ public class MainMenuController : MonoBehaviour
                 case "LevelSelect":
                     foreach (Transform button in frame.transform.Find("Panel").Find("Levels"))
                     {
-                        bool unlocked = SceneController.IsLevelUnlocked(button.gameObject.name);
+                        string levelName = button.gameObject.name;
+                        bool unlocked = SceneController.GetLevelUnlocked(levelName);
+                        bool completed = SceneController.GetLevelCompleted(levelName);
+                        float record = SceneController.GetLevelRecord(levelName);
+
+                        Debug.Log("Level: " + levelName + " Record: " + record);
+                        if (!record.Equals(0f))
+                        {
+                            button.Find("Record").gameObject.GetComponent<Text>().text = "" + record;
+                        }
 
                         if (unlocked)
                         {
-                            button.GetComponent<Image>().color = new Color((float)209/255,(float)134/255,(float)50/255,1);
+                            button.GetComponent<Image>().color = completed ? new Color((float)209/255, (float)134/255, (float)50/255, 1) : new Color((float)221 / 255, (float)216 / 255, (float)43 / 255, 1);
                             button.gameObject.GetComponent<Button>().onClick.AddListener(delegate {
                                 SceneController.ChangeScene(button.gameObject.name);
                             });
