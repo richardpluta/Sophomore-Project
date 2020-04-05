@@ -20,7 +20,7 @@ public class WeaponController : MonoBehaviour
         CurrentAmmo = MaxAmmo;
         Debug.Log("WeaponController starting");       
 
-        ammoDisplay = GameObject.FindObjectOfType<Text>();
+        // ammoDisplay = GameObject.FindObjectOfType<Text>();
     }
 
     // Update is called once per frame
