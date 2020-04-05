@@ -14280,6 +14280,7 @@ GameObject:
   - component: {fileID: 1702804285}
   - component: {fileID: 1702804283}
   - component: {fileID: 1702804281}
+  - component: {fileID: 1702804282}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Enemy
@@ -14303,6 +14304,25 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.025}
   m_Size: {x: 0.3, y: 0.45}
   m_Direction: 0
+--- !u!95 &1702804282
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1702804280}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e68a15441724a5b478ae00be64f55f21, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1702804283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14390,7 +14410,7 @@ SpriteRenderer:
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.4, y: 0.41}
+  m_Size: {x: 0.64, y: 0.64}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -14403,7 +14423,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1702804280}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 11.138, y: 1.751, z: -0.08186505}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -14412,7 +14432,7 @@ Transform:
   - {fileID: 979865441}
   m_Father: {fileID: 0}
   m_RootOrder: 17
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &1838720166
 GameObject:
   m_ObjectHideFlags: 0
