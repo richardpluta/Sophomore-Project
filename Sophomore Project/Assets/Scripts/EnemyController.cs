@@ -119,6 +119,7 @@ public class EnemyController : MonoBehaviour
     {
         Renderer.enabled = false;
         Collider.enabled = false;
+        GameObject.Destroy(this, 0);
     }
 
     public void Damage(int amount)
