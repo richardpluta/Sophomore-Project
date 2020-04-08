@@ -73,10 +73,6 @@ public class playerHealth : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D obj)
     {
-        if (obj.tag == "Enemy")
-        {
-            damagePlayer(enemyDmg);
-        }
         if (obj.tag == "Spikes") {
             damagePlayer(spikeDmg);
         }

@@ -48,7 +48,7 @@ public class WeaponController : MonoBehaviour
             EnemyController enemy = hit.transform.GetComponent<EnemyController>();
             if (enemy != null)
             {
-                enemy.Damage(Damage);
+                enemy.DamageSelf(Damage);
             }
             Beam.SetPosition(0, FirePoint.position);
             Beam.SetPosition(1, hit.point);
