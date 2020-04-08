@@ -10990,6 +10990,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   MaxHealth: 100
+  Damage: 0
   DetectionRange: 2
   WhatIsGround:
     serializedVersion: 2
@@ -13881,6 +13882,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8003201747775896894, guid: 77f54eef699ed394f922cb9deaee7578,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003201747775896894, guid: 77f54eef699ed394f922cb9deaee7578,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8003201747775896895, guid: 77f54eef699ed394f922cb9deaee7578,
         type: 3}
       propertyPath: bullet
@@ -13895,7 +13906,12 @@ PrefabInstance:
     - target: {fileID: 8003201747775896895, guid: 77f54eef699ed394f922cb9deaee7578,
         type: 3}
       propertyPath: wakeRange
-      value: 10
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8003201747775896895, guid: 77f54eef699ed394f922cb9deaee7578,
+        type: 3}
+      propertyPath: bulletSpeed
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77f54eef699ed394f922cb9deaee7578, type: 3}
