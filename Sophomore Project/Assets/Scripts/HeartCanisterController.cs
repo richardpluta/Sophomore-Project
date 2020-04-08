@@ -24,17 +24,12 @@ public class HeartCanisterController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnTriggerEnter2D(Collider2D hit)
     {
         playerHealth playerHeartsController = hit.GetComponent<playerHealth>();
         if (playerHeartsController != null)
         {
+            StatsController.HeartPickups++;
             Collider.enabled = false;
             Renderer.enabled = false;
             playerHeartsController.healPlayer(HeartAmmount);

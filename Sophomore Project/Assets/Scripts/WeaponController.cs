@@ -41,6 +41,7 @@ public class WeaponController : MonoBehaviour
 
     IEnumerator Shoot()
     {
+        StatsController.ShotsFired++;
         RaycastHit2D hit = Physics2D.Raycast(FirePoint.position, FirePoint.right, 100f, LayerMask.GetMask("Ground","Enemy"));
         
         if (hit)
@@ -48,7 +49,8 @@ public class WeaponController : MonoBehaviour
             EnemyController enemy = hit.transform.GetComponent<EnemyController>();
             if (enemy != null)
             {
-                enemy.Damage(Damage);
+                StatsController.ShotsHit++;
+                enemy.DamageSelf(Damage);
             }
             Beam.SetPosition(0, FirePoint.position);
             Beam.SetPosition(1, hit.point);

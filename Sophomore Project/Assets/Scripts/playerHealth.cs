@@ -61,6 +61,7 @@ public class playerHealth : MonoBehaviour
 
         if (health <= 0)
         {
+            StatsController.Deaths++;
             WeaponController weapon = player.GetComponent<WeaponController>();
             weapon.RefillAmmo(100);
             transform.position = player.respawnPoint;
@@ -73,10 +74,6 @@ public class playerHealth : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D obj)
     {
-        if (obj.tag == "Enemy")
-        {
-            damagePlayer(enemyDmg);
-        }
         if (obj.tag == "Spikes") {
             damagePlayer(spikeDmg);
         }

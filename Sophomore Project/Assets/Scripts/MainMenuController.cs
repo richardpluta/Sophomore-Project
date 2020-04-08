@@ -20,7 +20,7 @@ public class MainMenuController : MonoBehaviour
         frames.Add("LevelSelect", gameObject.transform.Find("LevelSelect").gameObject);
         frames.Add("SettingsMenu", gameObject.transform.Find("SettingsMenu").gameObject);
         frames.Add("KeybindsMenu", gameObject.transform.Find("KeybindsMenu").gameObject);
-        //frames.Add("CreditsMenu", gameObject.transform.Find("CreditsMenu").gameObject);
+        frames.Add("StatsMenu", gameObject.transform.Find("StatsMenu").gameObject);
 
         changeFrame("TitleScreen");
 
@@ -35,8 +35,8 @@ public class MainMenuController : MonoBehaviour
                     case "Settings":
                         changeFrame("SettingsMenu");
                         break;
-                    case "Credits":
-                        //changeFrame("CreditsMenu");
+                    case "Stats":
+                        changeFrame("StatsMenu");
                         break;
                     case "Quit":
                         Application.Quit();
@@ -64,10 +64,11 @@ public class MainMenuController : MonoBehaviour
                         bool completed = SceneController.GetLevelCompleted(levelName);
                         float record = SceneController.GetLevelRecord(levelName);
 
-                        Debug.Log("Level: " + levelName + " Record: " + record);
                         if (!record.Equals(0f))
                         {
-                            button.Find("Record").gameObject.GetComponent<Text>().text = "" + record;
+                            int minutes = (int)record / 60;
+                            float seconds = record % 60;
+                            button.Find("Record").gameObject.GetComponent<Text>().text = "" + minutes + ":" + seconds.ToString("F2");
                         }
 
                         if (unlocked)
@@ -136,14 +137,38 @@ public class MainMenuController : MonoBehaviour
                         }
                     }
                     break;
+                case "StatsMenu":
+                    foreach (Transform statsPanel in frame.transform.Find("Panel").Find("Stats"))
+                    {
+                        switch(statsPanel.gameObject.name)
+                        {
+                            case "Deaths":
+                                statsPanel.Find("Value").GetComponent<Text>().text = "" + StatsController.Deaths;
+                                break;
+                            case "Enemies":
+                                statsPanel.Find("Value").GetComponent<Text>().text = "" + StatsController.EnemiesKilled;
+                                break;
+                            case "Accuracy":
+                                statsPanel.Find("Value").GetComponent<Text>().text = StatsController.GetAccuracy().ToString("P");
+                                break;
+                            case "Hearts":
+                                statsPanel.Find("Value").GetComponent<Text>().text = "" + StatsController.HeartPickups;
+                                break;
+                            case "Ammo":
+                                statsPanel.Find("Value").GetComponent<Text>().text = "" + StatsController.AmmoPickups;
+                                break;
+                            case "Playtime":
+                                float t = StatsController.Playtime;
+
+                                int minutes = (int)t / 60;
+                                float seconds = t % 60;
+                                statsPanel.Find("Value").GetComponent<Text>().text = "" + minutes + ":" + seconds.ToString("F2");
+                                break;
+                        }
+                    }
+                    break;
             }
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void setCurrentFrame(string newFrame)

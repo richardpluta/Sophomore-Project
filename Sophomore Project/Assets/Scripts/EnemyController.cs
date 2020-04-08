@@ -8,6 +8,7 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private int Speed;
     [SerializeField] private int MaxHealth;
+    [SerializeField] private int Damage;
     [SerializeField] private int DetectionRange;
     [SerializeField] private LayerMask WhatIsGround;
     [SerializeField] private float JumpForce = 400f;
@@ -25,11 +26,12 @@ public class EnemyController : MonoBehaviour
     private Transform Player;
 
     private bool Grounded;
-    private bool FacingRight = false; 
+    private bool FacingRight = true; 
     private Vector2 Velocity = Vector2.zero;
     private int Health;
 
     private bool SeenPlayer;
+    private bool DamageDebounce;
 
     public UnityEvent OnLandEvent;
 
@@ -68,8 +70,11 @@ public class EnemyController : MonoBehaviour
                     OnLandEvent.Invoke();
             }
         }
-   
-        if (SeenPlayer)
+
+        if (DamageDebounce)
+        {
+            Move(0f, false);
+        } else if (SeenPlayer)
         {
             //move towards player on X, jump if something is in its way
             Vector2 offset = Player.position - transform.position;
@@ -117,16 +122,34 @@ public class EnemyController : MonoBehaviour
     
     private void Kill()
     {
+        StatsController.EnemiesKilled++;
         Renderer.enabled = false;
         Collider.enabled = false;
         GameObject.Destroy(this, 0);
     }
 
-    public void Damage(int amount)
+    private IEnumerator DamagePlayer()
+    {
+        DamageDebounce = true;
+        playerHealth health = Player.GetComponent<playerHealth>();
+        health.damagePlayer(Damage);
+        if (health.health <= 0)
+            SeenPlayer = false;
+        yield return new WaitForSeconds(.5f);
+        DamageDebounce = false;
+    }
+
+    public void DamageSelf(int amount)
     {
         Health -= amount;
 
         if (Health <= 0)
             Kill();
-    }    
+    }
+
+    private void OnTriggerStay2D(Collider2D obj)
+    {
+        if (obj.gameObject.transform == Player)
+            StartCoroutine(DamagePlayer());
+    }
 }
