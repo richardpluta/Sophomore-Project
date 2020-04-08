@@ -40720,6 +40720,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 3
   MaxHealth: 100
+  Damage: 2
   DetectionRange: 2
   WhatIsGround:
     serializedVersion: 2
@@ -42783,6 +42784,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 3
   MaxHealth: 100
+  Damage: 2
   DetectionRange: 2
   WhatIsGround:
     serializedVersion: 2
@@ -43574,6 +43576,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 3
   MaxHealth: 100
+  Damage: 2
   DetectionRange: 2
   WhatIsGround:
     serializedVersion: 2
@@ -45660,6 +45663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 3
   MaxHealth: 100
+  Damage: 2
   DetectionRange: 2
   WhatIsGround:
     serializedVersion: 2
@@ -48186,6 +48190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   MaxHealth: 1000
+  Damage: 2
   DetectionRange: 2
   WhatIsGround:
     serializedVersion: 2
