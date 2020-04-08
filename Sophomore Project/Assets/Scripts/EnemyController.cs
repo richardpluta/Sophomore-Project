@@ -122,6 +122,7 @@ public class EnemyController : MonoBehaviour
     
     private void Kill()
     {
+        StatsController.EnemiesKilled++;
         Renderer.enabled = false;
         Collider.enabled = false;
         GameObject.Destroy(this, 0);

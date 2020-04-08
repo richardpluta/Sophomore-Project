@@ -9,7 +9,6 @@ public class AmmoCrateController : MonoBehaviour
     private BoxCollider2D Collider;
     private SpriteRenderer Renderer;
 
-    // Start is called before the first frame update
     void Start()
     {
         Enabled = true;
@@ -23,17 +22,12 @@ public class AmmoCrateController : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void OnTriggerEnter2D(Collider2D hit)
     {
         WeaponController weapon = hit.GetComponent<WeaponController>();
         if (weapon != null)
         {
+            StatsController.AmmoPickups++;
             Collider.enabled = false;
             Renderer.enabled = false;
             weapon.RefillAmmo(AmmoAmount);

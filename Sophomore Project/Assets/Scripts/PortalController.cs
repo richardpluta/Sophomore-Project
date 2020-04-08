@@ -30,6 +30,7 @@ public class PortalController : MonoBehaviour
             float levelTime = Time.time - startTime;
             float oldRecord = SceneController.GetLevelRecord(levelName);
 
+            StatsController.Playtime += levelTime;
             if (!oldRecord.Equals(0f) ? oldRecord > levelTime : true)
                 SceneController.SetLevelRecord(levelName, levelTime);
             SceneController.SetLevelCompleted(levelName, true);
