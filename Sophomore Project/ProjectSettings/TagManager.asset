@@ -8,6 +8,7 @@ TagManager:
   - Checkpoint
   - Spikes
   - Enemy
+  - Turret
   layers:
   - Default
   - TransparentFX
