@@ -27,6 +27,7 @@ public class AmmoCrateController : MonoBehaviour
         WeaponController weapon = hit.GetComponent<WeaponController>();
         if (weapon != null)
         {
+            SoundManagerScript.PlaySound("AmmoPickup");
             StatsController.AmmoPickups++;
             Collider.enabled = false;
             Renderer.enabled = false;

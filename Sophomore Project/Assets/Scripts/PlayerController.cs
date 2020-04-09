@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
+            SoundManagerScript.PlaySound("CharacterJump");
             jump = true;
             animator.SetBool("IsJumping", true);
         }

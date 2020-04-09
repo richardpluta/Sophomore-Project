@@ -61,6 +61,7 @@ public class playerHealth : MonoBehaviour
 
         if (health <= 0)
         {
+            SoundManagerScript.PlaySound("CharacterDie");
             StatsController.Deaths++;
             WeaponController weapon = player.GetComponent<WeaponController>();
             weapon.RefillAmmo(100);
@@ -88,13 +89,14 @@ public class playerHealth : MonoBehaviour
     public void damagePlayer(int dmg)
     {
         if (isInvincible) return;
-
+        SoundManagerScript.PlaySound("CharacterHurt");
         health -= dmg;
 
         StartCoroutine(BecomeTemporarilyInvincible());
     }
 
     public void healPlayer(int heal) {
+        SoundManagerScript.PlaySound("HeartPickup");
         health += heal;
     }
 

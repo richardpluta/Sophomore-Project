@@ -28,6 +28,7 @@ public class WeaponController : MonoBehaviour
     {
         if (Input.GetButtonDown("Fire1") && CurrentAmmo > 0)
         {
+            SoundManagerScript.PlaySound("LaserShot");
             StartCoroutine(Shoot());
         }
         

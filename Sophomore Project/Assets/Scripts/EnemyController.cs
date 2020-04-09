@@ -86,6 +86,8 @@ public class EnemyController : MonoBehaviour
             Move(horizontalMove * Time.fixedDeltaTime, jump);
         } else if (Vector2.Distance(Player.position, transform.position) <= DetectionRange)
         {
+            SoundManagerScript.PlaySound("EnemySeesCharacter");
+
             RaycastHit2D hit = Physics2D.Raycast(transform.position, Player.position - transform.position, 10f, LayerMask.GetMask("Default", "Ground"));
             SeenPlayer = hit.transform == Player;
 
@@ -122,6 +124,7 @@ public class EnemyController : MonoBehaviour
     
     private void Kill()
     {
+        SoundManagerScript.PlaySound("EnemyDie");
         StatsController.EnemiesKilled++;
         Renderer.enabled = false;
         Collider.enabled = false;
