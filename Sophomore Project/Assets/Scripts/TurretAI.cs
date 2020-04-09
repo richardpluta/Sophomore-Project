@@ -21,10 +21,6 @@ public class TurretAI : MonoBehaviour
     public Transform shootPointRight;
     public Transform shootPointLeft;
 
-    void Awake()
-    {
-
-    }
 
     void Start()
     {
@@ -40,10 +36,6 @@ public class TurretAI : MonoBehaviour
             lookingRight = true;
         }
 
-        if (target.transform.position.x < transform.position.x)
-        {
-            lookingRight = false;
-        }
     }
 
     void RangeCheck()
@@ -67,29 +59,16 @@ public class TurretAI : MonoBehaviour
     {
         bulletTimer += Time.deltaTime;
 
-        if (bulletTimer >= shotInterval)
+        if (bulletTimer >= shotInterval && attackingRight)
         {
             Vector2 direction = target.transform.position - transform.position;
 
-            
-
-            if (!attackingRight)
-            {
-                GameObject bulletClone;
-                bulletClone = Instantiate(bullet, shootPointLeft.transform.position, shootPointLeft.transform.rotation) as GameObject;
-                bulletClone.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
-
-                bulletTimer = 0;
-            }
-
-            if (attackingRight)
-            {
                 GameObject bulletClone;
                 bulletClone = Instantiate(bullet, shootPointRight.transform.position, shootPointRight.transform.rotation) as GameObject;
                 bulletClone.GetComponent<Rigidbody2D>().velocity = direction * bulletSpeed;
 
                 bulletTimer = 0;
-            }
+
         }
     }
 }

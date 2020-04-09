@@ -18,14 +18,7 @@ public class TurretAttack : MonoBehaviour
     {
         if (col.CompareTag("Player"))
         {
-            if (isLeft)
-            {
-                turretAI.Attack(false);
-            }
-            else
-            {
                 turretAI.Attack(true);
-            }
         }
     }
 }
