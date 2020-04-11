@@ -22,6 +22,7 @@ public class EnemyController : MonoBehaviour
     private SpriteRenderer Renderer;
     private CapsuleCollider2D Collider;
     private Rigidbody2D Rigidbody2D;
+    private Animator animator;
 
     private Transform Player;
 
@@ -42,6 +43,7 @@ public class EnemyController : MonoBehaviour
         Renderer = GetComponent<SpriteRenderer>();
         Collider = GetComponent<CapsuleCollider2D>();
         Rigidbody2D = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
         Player = GameObject.Find("Player").transform;
 
@@ -79,7 +81,7 @@ public class EnemyController : MonoBehaviour
             //move towards player on X, jump if something is in its way
             Vector2 offset = Player.position - transform.position;
             float horizontalMove = offset.normalized.x * Speed;
-
+            animator.SetFloat("Speed", Mathf.Abs(horizontalMove));
             RaycastHit2D hit = Physics2D.Raycast(GroundCheck.position, -GroundCheck.right, .25f, LayerMask.GetMask("Ground"));
             bool jump = (hit.transform != null) || (offset.y > .5f);
 
