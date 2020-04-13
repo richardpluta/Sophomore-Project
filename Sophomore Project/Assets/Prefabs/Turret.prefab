@@ -261,11 +261,11 @@ MonoBehaviour:
   distance: 0
   wakeRange: 10
   shotInterval: 1
-  bulletSpeed: 50
+  bulletSpeed: 2
   bulletTimer: 0
-  awake: 0
+  awake: 1
   lookingRight: 1
-  bullet: {fileID: 3226179468978822070, guid: 4656b69ab3266894999bf53ea75ca5e6, type: 3}
+  bullet: {fileID: 1549821882305369195, guid: eb0cef79c1ee98746a8a41cd0cfc9187, type: 3}
   target: {fileID: 0}
   shootPointRight: {fileID: 8003201748850023800}
   shootPointLeft: {fileID: 0}
