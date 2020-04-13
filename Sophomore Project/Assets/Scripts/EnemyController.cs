@@ -27,7 +27,7 @@ public class EnemyController : MonoBehaviour
     private Transform Player;
 
     private bool Grounded;
-    private bool FacingRight = true; 
+    private bool FacingRight; 
     private Vector2 Velocity = Vector2.zero;
     private int Health;
 
@@ -48,6 +48,8 @@ public class EnemyController : MonoBehaviour
         Player = GameObject.Find("Player").transform;
 
         Health = MaxHealth;
+        Damage = Damage == 0 ? 2 : Damage;
+        FacingRight = transform.rotation.y.Equals(0) ? false : true;
 
         SeenPlayer = false;
         if (OnLandEvent == null)
