@@ -40858,7 +40858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c91f632f01cec042bfc8767e7720f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 3
+  Speed: 10
   MaxHealth: 100
   Damage: 2
   DetectionRange: 2
@@ -42922,7 +42922,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c91f632f01cec042bfc8767e7720f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 3
+  Speed: 10
   MaxHealth: 100
   Damage: 2
   DetectionRange: 2
@@ -43714,7 +43714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c91f632f01cec042bfc8767e7720f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 3
+  Speed: 10
   MaxHealth: 100
   Damage: 2
   DetectionRange: 2
@@ -45801,7 +45801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c91f632f01cec042bfc8767e7720f7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 3
+  Speed: 10
   MaxHealth: 100
   Damage: 2
   DetectionRange: 2
