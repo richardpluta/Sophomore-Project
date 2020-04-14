@@ -31,6 +31,7 @@ static public class SceneController
         levels.Add("3", new Level("3", false, false));
         levels.Add("4", new Level("4", false, false));
         levels.Add("5", new Level("5", false, false));
+        levels.Add("6", new Level("6", false, false));
     }
     
     static public void ChangeScene(string sceneName)
